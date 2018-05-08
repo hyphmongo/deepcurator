@@ -50,10 +50,10 @@ SPLIT_SIZE = 15000
 BOTTOM_SPLIT = row_count - SPLIT_SIZE
 
 if row_count < SPLIT_SIZE * 2:
-    print 'Not enough data to split'
+    print ('Not enough data to split')
     quit()
 
-with open('labels.csv', 'wb') as file:
+with open('labels.csv', 'w') as file:
     for index, row in df.iterrows():
         if index < SPLIT_SIZE:
             file.write(row['youtube_id'] + ',1\n')
