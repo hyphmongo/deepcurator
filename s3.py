@@ -21,14 +21,13 @@ class Client:
         if destination is None:
             destination = source
 
-        self.client.upload_file(source, 'music-aesthetics-scrape', destination)
+        self.client.upload_file(source, self.bucket, destination)
 
     def download(self, source, destination=None):
         if destination is None:
             destination = source
 
-        self.client.download_file(
-            'music-aesthetics-scrape', source, destination)
+        self.client.download_file(self.bucket, source, destination)
 
     def list_items(self, prefix=None):
         paginator = self.client.get_paginator('list_objects_v2')
