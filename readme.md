@@ -1,6 +1,6 @@
 # DeepCurator
 
-A convolutional neural network trained to recognize the best\* electronic music. Using freely available data from **Discogs** _'the largest music database and marketplace in the world'_ a dataset was crafted of the best and worst rated items tagged as 'Electronic'
+A convolutional neural network trained to recognize good\* electronic music. Using freely available data from **Discogs** _'the largest music database and marketplace in the world'_ a dataset was crafted of the best and worst rated items tagged as 'Electronic'
 
 Items were scored by taking the have/want ratio, average rating, number of ratings, and recommended sale price, and combining them to a normalized score. The top 15,000 scoring items were labelled as 'good' and the bottom 15,000 as 'not-good' (for lack of a better term)
 
@@ -8,7 +8,7 @@ For each item the audio was extracted using the associated YouTube link provided
 
 After training, the neural network can be provided with an _unseen_ clip of audio and assign it a score. The higher the score, the more confidence it has of the audio being categorized as 'good'
 
-\*Best is subjective, since taste is subjective. The scoring method is not perfect since it partly relies on the popularity of a release to assign a category. Also, rarer items can have an increased price because of their scarcity, not their audio qualities, which inflates the score erroneously. The scoring metric could be viewed more of a 'what will be sought-after on Discogs' rather than 'what is objectively good'
+\*Good is subjective, since taste is subjective. The scoring method is not perfect since it partly relies on the popularity of a release to assign a category. Also, rarer items can have an increased price because of their scarcity, not their audio qualities, which inflates the score erroneously. The scoring metric could be viewed more of a 'what will be sought-after on Discogs' rather than 'what is objectively good'
 
 ## Installation
 
