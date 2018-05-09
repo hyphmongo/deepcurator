@@ -1,5 +1,8 @@
 config.yml
 .vscode
+audio/
+slices/
+spectrograms/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
