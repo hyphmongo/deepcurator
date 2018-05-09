@@ -27,8 +27,6 @@ class Client:
         if destination is None:
             destination = source
 
-        print (self.bucket, source, destination)
-
         self.client.download_file(self.bucket, source, destination)
 
     def list_items(self, prefix=None):
