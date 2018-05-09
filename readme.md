@@ -14,7 +14,7 @@ After training, the neural network can be provided with an _unseen_ clip of audi
 
 This project uses Pipenv to manage dependencies. To install all dependencies run `pipenv install`. To activate the virtual environment run `pipenv shell`
 
-Data files are stored on S3, to re-create the results, or train your own model, an configuration file will be needed. Create `config.yml` in the root of the project and fill in the following values.
+Data files are stored on S3, to re-create the results, or train your own model, a configuration file will be needed. Create `config.yml` in the root of the project and fill in the following values.
 
 ```yaml
 s3:
@@ -43,7 +43,7 @@ A small Flask server is provided so predictions against unseen audio can be made
 To start the server run `server.py` this will load the trained model, ready for incoming events. The predictor takes in an mp3 file, splits it into _n_ slices, where n is the length of the audio divided by 30 seconds, and creates an average rating using the sum of the individual ratings for each slice. You can try it in your terminal by running:
 
 ```
-curl -X POST -F audio=@"audio.mp3" 'http://localhost:5000/predict'
+curl -X POST -F audio=@"audio.mp3" 'http://localhost:5000/rate'
 ```
 
 A score between 0 and 100 will be returned, where anything over 50 is what the model deems as 'good'

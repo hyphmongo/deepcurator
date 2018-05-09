@@ -3,14 +3,17 @@ import heapq
 import uuid
 import os
 import numpy as np
+import errno
+import tensorflow as tf
 from keras.models import load_model
 from process_audio import process_track
+
 
 app = flask.Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 
 
-@app.route("/rating", methods=["POST"])
+@app.route("/rate", methods=["POST"])
 def rating():
     audio = flask.request.files.get("audio")
 
@@ -18,7 +21,7 @@ def rating():
         return 'Missing required parameter: audio', 400
 
     audio_id = uuid.uuid4().hex
-    filename = audio_id + '.mp3'
+    filename = 'audio/' + audio_id + '.mp3'
 
     audio.save(filename)
 
@@ -37,15 +40,26 @@ def rating():
     for i in range(len(slices)):
         x[i, ] = slices[i]/255.
 
-    predictions = [pred[0] for pred in model.predict(x)]
-    best_predictions = heapq.nlargest(5, predictions)
+    with graph.as_default():
+        predictions = [pred[0] for pred in model.predict(x)]
+        best_predictions = heapq.nlargest(5, predictions)
 
-    score = (sum(best_predictions) / len(best_predictions)) * 100
+        score = (sum(best_predictions) / len(best_predictions)) * 100
 
-    return str('{:.2f}'.format(score))
+        return str('{:.2f}'.format(score))
 
 
 if __name__ == "__main__":
     global model
+    global graph
+
+    try:
+        os.makedirs('audio')
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
+
     model = load_model('models/model.hdf5')
+    graph = tf.get_default_graph()
+
     app.run()
