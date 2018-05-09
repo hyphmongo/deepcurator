@@ -41,7 +41,7 @@ df['weighted_rating'] = df.apply(lambda row: bayesian_rating(
 
 # Create normalized (0-1) score for the combined rating, price and ratio columns
 df['score'] = min_max(combined_score(df))
-df.sort_values('score', ascending=False)
+df.sort_values('score', ascending=False, inplace=True)
 
 df = df.reset_index(drop=True)
 row_count = df.shape[0]
