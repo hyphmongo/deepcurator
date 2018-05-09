@@ -8,13 +8,13 @@ For each item the audio was extracted using the associated YouTube link provided
 
 After training, the neural network can be provided with an _unseen_ clip of audio and assign it a score. The higher the score, the more confidence it has of the audio being categorized as 'good'
 
-\* Best is subjective, since taste is subjective. The scoring method is not perfect since it partly relies on the popularity of a release to assign a category. Also, rarer items can have an increased price because of their scarcity, not their audio qualities, which inflates the score erroneously. The scoring metric could be viewed more of a 'what will be sought-after on Discogs' rather than 'what is objectively good'
+\*Best is subjective, since taste is subjective. The scoring method is not perfect since it partly relies on the popularity of a release to assign a category. Also, rarer items can have an increased price because of their scarcity, not their audio qualities, which inflates the score erroneously. The scoring metric could be viewed more of a 'what will be sought-after on Discogs' rather than 'what is objectively good'
 
 ## Installation
 
 This project uses Pipenv to manage dependencies. To install all dependencies run `pipenv install`. To activate the virtual environment run `pipenv shell`
 
-Data files are stored on S3, to re-create the results, or train your own model, an configuration file will be needed. Create `config.yml` in the roof of the project and fill in the following values.
+Data files are stored on S3, to re-create the results, or train your own model, an configuration file will be needed. Create `config.yml` in the root of the project and fill in the following values.
 
 ```yaml
 s3:
