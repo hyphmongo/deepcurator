@@ -12,6 +12,9 @@ from process_audio import process_track
 app = flask.Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 
+model = load_model('models/model.hdf5')
+graph = tf.get_default_graph()
+
 
 @app.route("/rate", methods=["POST"])
 def rating():
@@ -40,6 +43,7 @@ def rating():
     for i in range(len(slices)):
         x[i, ] = slices[i]/255.
 
+    global graph
     with graph.as_default():
         predictions = [pred[0] for pred in model.predict(x)]
         best_predictions = heapq.nlargest(5, predictions)
@@ -50,16 +54,10 @@ def rating():
 
 
 if __name__ == "__main__":
-    global model
-    global graph
-
     try:
         os.makedirs('audio')
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
-
-    model = load_model('models/model.hdf5')
-    graph = tf.get_default_graph()
 
     app.run()
